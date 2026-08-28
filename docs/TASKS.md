@@ -9,7 +9,7 @@ and completion rules.
 | ID | Title | Milestone | Status | Branch | External issue |
 |---|---|---:|---|---|---|
 | AJA-001 | Lock task, Git, and QA delivery workflow | Pre-implementation | Ready for QA | Not available | Not created |
-| AJA-002 | Initialize repository baseline | Milestone 0 | Ready | task/AJA-002-repository-foundation | Not created |
+| AJA-002 | Initialize repository baseline | Milestone 0 | Ready for QA | task/AJA-002-repository-foundation | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -108,13 +108,13 @@ requires user approval before the task is done or merged.
 ## AJA-002 — Initialize repository baseline
 
 - Milestone: MILESTONE 0 — Repository and Foundation
-- Status: Ready
+- Status: Ready for QA
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
-- Base branch: main (to be initialized)
+- Base branch: main
 - Task branch: task/AJA-002-repository-foundation
 - Pull request: Not created
-- Commits: Not committed; repository initialization pending
+- Commits: `480b444` — `AJA-002: establish repository baseline`; pending QA-handoff record commit
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
@@ -142,21 +142,26 @@ task branch before application foundation work begins.
 
 ### Acceptance Criteria
 
-- [ ] Git is initialized with `main` as its base branch.
-- [ ] The supplied `origin` remote is configured.
-- [ ] A baseline commit contains the existing repository materials and task record.
-- [ ] The baseline is pushed to `origin/main`.
+- [x] Git is initialized with `main` as its base branch.
+- [x] The supplied `origin` remote is configured.
+- [x] A baseline commit contains the existing repository materials and task record.
+- [x] The baseline is pushed to `origin/main`.
 
 ### Implementation Notes
 
 - The delivery workflow requires `main` for the initial baseline; the supplied
   `master` push command is therefore normalized to `main`.
+- Baseline commit `480b444` was pushed to `origin/main`. The dedicated task
+  branch was then created locally, as required before Milestone 0 application
+  foundation work begins.
 
 ### Validation Evidence
 
 | Command/check | Result | Date |
 |---|---|---|
-| Not run | Pending | 2026-08-28 |
+| `git status --short --branch` after push | Passed; `main` tracks `origin/main` | 2026-08-28 |
+| `git remote -v` | Passed; fetch and push URLs match the supplied repository | 2026-08-28 |
+| `git log -1 --oneline` | Passed; `480b444 AJA-002: establish repository baseline` | 2026-08-28 |
 
 ### Manual QA
 
@@ -167,7 +172,7 @@ task branch before application foundation work begins.
 
 ### QA Result
 
-- Status: Pending
+- Status: Pending user QA
 - Tested by: Pending
 - Date: Pending
 - Actual result: Pending
@@ -176,7 +181,7 @@ task branch before application foundation work begins.
 ### Known Limitations
 
 - This task only establishes the Git baseline. The Next.js foundation remains
-  pending on the dedicated task branch.
+  pending on the dedicated task branch and has not been implemented.
 
 ## Task Template
 
