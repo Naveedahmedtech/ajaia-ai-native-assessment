@@ -12,7 +12,7 @@ export function RichTextEditor({ documentId, initialContent }: { documentId: str
   const timer = useRef<number | undefined>(undefined);
   const lastContent = useRef<object>(initialContent);
   const save = async (content: object, current: number) => {
-    const result = await saveDocumentContent(documentId, content);
+    const result = await saveDocumentContent(documentId, JSON.stringify(content));
     if (current === version.current) setStatus(result.ok ? "Saved" : "Save failed");
   };
   const editor = useEditor({ extensions: [StarterKit, Underline], content: initialContent, onUpdate: ({ editor }) => {
