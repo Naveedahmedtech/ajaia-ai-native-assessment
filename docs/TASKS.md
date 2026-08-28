@@ -12,7 +12,7 @@ and completion rules.
 | AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
-| AJA-005 | Build dashboard and document lifecycle | Milestone 2 | In Progress | task/AJA-005-dashboard-document-lifecycle | Not created |
+| AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Ready for QA | task/AJA-005-dashboard-document-lifecycle | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -420,13 +420,13 @@ HTTP-only cookie.
 ## AJA-005 — Build dashboard and document lifecycle
 
 - Milestone: MILESTONE 2 — Dashboard and Document Creation
-- Status: In Progress
+- Status: Ready for QA
 - Owner: AI
 - External issue: Not created
 - Base branch: task/AJA-004-database-demo-identity
 - Task branch: task/AJA-005-dashboard-document-lifecycle
 - Pull request: Not created
-- Commits: Not committed
+- Commits: `e3e783f` — `AJA-005: add dashboard document lifecycle`; pending QA-handoff commit
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
@@ -451,20 +451,33 @@ are listed separately and protected by server-side access checks.
 
 ### Acceptance Criteria
 
-- [ ] Alex can create, rename, refresh, and retain a document.
-- [ ] Sam cannot discover Alex's private document.
-- [ ] Owner-only title updates trim input and reject empty or overlong titles.
-- [ ] Owned and shared sections are separately ordered by most-recent update.
+- [ ] Manual QA: Alex can create, rename, refresh, and retain a document.
+- [ ] Manual QA: Sam cannot discover Alex's private document.
+- [x] Owner-only title updates trim input and reject empty or overlong titles.
+- [x] Owned and shared queries separately order by most-recent update.
 
 ### Implementation Notes
 
-- Pending implementation.
+- Added a server-rendered dashboard with separate `My Documents` and `Shared With Me` queries.
+- New documents are server-created for the current user with `Untitled Document`
+  and the required empty structured-document JSON.
+- Read access is checked server-side for the document route; inaccessible document
+  IDs use the route's not-found behavior.
+- Rename validates and trims titles on the server and queries ownership before update.
+
+### Files Changed
+
+- `src/app/page.tsx`, `src/app/documents/[id]/page.tsx`, and `src/app/actions/documents.ts`
+- `src/lib/documents.ts` and this task register
 
 ### Validation Evidence
 
 | Command/check | Result | Date |
 |---|---|---|
-| Not run | Pending | 2026-08-28 |
+| `npm run lint` | Passed | 2026-08-28 |
+| `npm run build` | Passed; dynamic dashboard and document route compiled | 2026-08-28 |
+| Local `GET /` | Passed; dashboard returned create control and owned/shared sections | 2026-08-28 |
+| `npm test` | Not run; automated-test milestone has not started | 2026-08-28 |
 
 ### Manual QA
 
@@ -472,6 +485,10 @@ are listed separately and protected by server-side access checks.
    - Expected: The title persists.
 2. Switch to Sam and return to the dashboard.
    - Expected: Alex's private document is absent.
+3. As Alex, visit the document route and rename the document with leading/trailing whitespace.
+   - Expected: The saved title is trimmed; empty and over-120-character titles are rejected without changing it.
+4. As Sam, manually enter Alex's private document URL.
+   - Expected: The route returns the not-found state rather than document data.
 
 ### QA Result
 
@@ -484,6 +501,8 @@ are listed separately and protected by server-side access checks.
 ### Known Limitations
 
 - Content editing, import, and sharing management are planned for later milestones.
+- The dashboard is intentionally minimal; rename validation feedback is not yet
+  rendered inline and will be refined with later form-feedback work.
 
 ## Task Template
 
