@@ -13,7 +13,7 @@ and completion rules.
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
 | AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
-| AJA-006 | Add rich-text editor persistence | Milestone 3 | In Progress | task/AJA-006-rich-text-editor | Not created |
+| AJA-006 | Add rich-text editor persistence | Milestone 3 | Ready for QA | task/AJA-006-rich-text-editor | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -508,13 +508,13 @@ are listed separately and protected by server-side access checks.
 ## AJA-006 — Add rich-text editor persistence
 
 - Milestone: MILESTONE 3 — Rich Text Editor
-- Status: In Progress
+- Status: Ready for QA
 - Owner: AI
 - External issue: Not created
 - Base branch: task/AJA-005-dashboard-document-lifecycle
 - Task branch: task/AJA-006-rich-text-editor
 - Pull request: Not created
-- Commits: Not committed
+- Commits: `c78deae` — rich-text persistence; `5e0a2e3` — editor save controls
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
@@ -537,19 +537,23 @@ Accessible document users can edit required Tiptap rich text and persist structu
 
 ### Acceptance Criteria
 
-- [ ] Required formatting persists after refresh for owner and shared user.
-- [ ] Autosave is debounced, retryable, and does not let stale responses clear newer changes.
-- [ ] Content over 2 MiB is safely rejected without loss.
+- [ ] Manual QA: required formatting persists after refresh for owner and shared user.
+- [x] Autosave is debounced, retryable, and does not let stale responses clear newer changes.
+- [x] Content over 2 MiB is safely rejected without loss.
 
 ### Implementation Notes
 
-- Pending implementation.
+- Added the required Tiptap toolbar (bold, italic, underline, headings 1–3,
+  bullet and numbered lists) and structured JSON save action.
+- Added 750 ms debouncing, version-based stale response protection, visible save
+  state, retry, and server-side content-size validation.
 
 ### Validation Evidence
 
 | Command/check | Result | Date |
 |---|---|---|
-| Not run | Pending | 2026-08-28 |
+| `npm run lint` | Passed | 2026-08-28 |
+| `npm run build` | Passed; editor route compiled | 2026-08-28 |
 
 ### Manual QA
 
