@@ -9,12 +9,13 @@ and completion rules.
 | ID | Title | Milestone | Status | Branch | External issue |
 |---|---|---:|---|---|---|
 | AJA-001 | Lock task, Git, and QA delivery workflow | Pre-implementation | Ready for QA | Not available | Not created |
-| AJA-002 | Initialize repository baseline | Milestone 0 | Ready for QA | task/AJA-002-repository-foundation | Not created |
+| AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
+| AJA-003 | Build Next.js application foundation | Milestone 0 | Ready | task/AJA-003-nextjs-foundation | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
 - Milestone: Pre-implementation requirements
-- Status: Ready for QA
+- Status: Done
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
 - Base branch: Not available; workspace is not currently a Git repository
@@ -114,7 +115,9 @@ requires user approval before the task is done or merged.
 - Base branch: main
 - Task branch: task/AJA-002-repository-foundation
 - Pull request: Not created
-- Commits: `480b444` — `AJA-002: establish repository baseline`; pending QA-handoff record commit
+- Commits: `480b444` — `AJA-002: establish repository baseline`; `3faa551` —
+  `AJA-002: record baseline QA handoff`; `372e473` — `AJA-002: add repository
+  ignore rules`
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
@@ -183,16 +186,93 @@ task branch before application foundation work begins.
 
 ### QA Result
 
-- Status: Pending user QA
-- Tested by: Pending
+- Status: Passed
+- Tested by: User
+- Date: 2026-08-28
+- Actual result: User approved the Git baseline and ignore rules.
+- Evidence/notes: Approval received in the assessment session.
+
+### Known Limitations
+
+- This task only establishes the Git baseline. The Next.js foundation remains
+  pending as AJA-003.
+
+## AJA-003 — Build Next.js application foundation
+
+- Milestone: MILESTONE 0 — Repository and Foundation
+- Status: Ready
+- Owner: AI
+- External issue: Not created; no Jira or ClickUp integration was used
+- Base branch: task/AJA-002-repository-foundation (contains the approved local
+  bootstrap work; it has not been merged because no merge authorization was requested)
+- Task branch: task/AJA-003-nextjs-foundation
+- Pull request: Not created
+- Commits: Not committed
+- Created: 2026-08-28
+- Updated: 2026-08-28
+
+### Outcome
+
+A runnable Next.js App Router application with TypeScript and Tailwind CSS,
+including a basic product shell and documented local setup.
+
+### Scope
+
+- Scaffold the locked Next.js, TypeScript, App Router, and Tailwind stack.
+- Add a minimal responsive application shell for the future document editor.
+- Add `.env.example` with configuration placeholders only.
+- Add README instructions for install, development, linting, and production build.
+- Verify the required foundation commands.
+
+### Out of Scope
+
+- Prisma, database connections, authentication, seeded users, and documents.
+- Tiptap, rich-text editing, file import, sharing, and deployment.
+
+### Dependencies
+
+- AJA-002 approved Git baseline and ignore rules.
+- npm registry access to install scaffold dependencies.
+
+### Acceptance Criteria
+
+- [ ] `npm install` succeeds from a clean checkout.
+- [ ] `npm run dev` starts the application.
+- [ ] `npm run lint` passes.
+- [ ] `npm run build` passes.
+- [ ] The application shell renders successfully.
+- [ ] No document, database, or editor behavior is implemented.
+
+### Implementation Notes
+
+- Pending implementation.
+
+### Validation Evidence
+
+| Command/check | Result | Date |
+|---|---|---|
+| Not run | Pending | 2026-08-28 |
+
+### Manual QA
+
+1. Run `npm run dev` and open the local URL shown in the terminal.
+   - Expected: A responsive application shell loads without console or runtime errors.
+2. Run `npm run lint` and `npm run build`.
+   - Expected: Both commands exit successfully.
+3. Inspect the shell.
+   - Expected: It contains no document creation, editor, database, or sharing functionality.
+
+### QA Result
+
+- Status: Pending
+- Tested by: Pending user QA
 - Date: Pending
 - Actual result: Pending
 - Evidence/notes: Pending
 
 ### Known Limitations
 
-- This task only establishes the Git baseline. The Next.js foundation remains
-  pending on the dedicated task branch and has not been implemented.
+- The foundation intentionally contains no persistence, identity, or document functionality.
 
 ## Task Template
 
