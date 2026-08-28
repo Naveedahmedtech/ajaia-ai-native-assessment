@@ -10,7 +10,8 @@ and completion rules.
 |---|---|---:|---|---|---|
 | AJA-001 | Lock task, Git, and QA delivery workflow | Pre-implementation | Ready for QA | Not available | Not created |
 | AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
-| AJA-003 | Build Next.js application foundation | Milestone 0 | Ready for QA | task/AJA-003-nextjs-foundation | Not created |
+| AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
+| AJA-004 | Add database and demo identity | Milestone 1 | Ready | task/AJA-004-database-demo-identity | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -209,7 +210,7 @@ task branch before application foundation work begins.
 - Pull request: Not created
 - Commits: `6964e54` — `AJA-003: build Next.js application foundation`;
   `2b5c2d6` — `AJA-003: record foundation validation`; `5eebc49` —
-  `AJA-003: add system color themes`
+  `AJA-003: add system color themes`; `4d7e491` — `AJA-003: record theme validation`
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
@@ -298,6 +299,90 @@ including a basic product shell and documented local setup.
 
 ### QA Result
 
+- Status: Passed
+- Tested by: User
+- Date: 2026-08-28
+- Actual result: User approved the foundation and instructed work to move to the next milestone.
+- Evidence/notes: Approval received in the assessment session.
+
+### Known Limitations
+
+- The foundation intentionally contains no persistence, identity, document,
+  editor, import, or sharing functionality; those are planned for later milestones.
+- `npm install` reported a non-blocking pending optional postinstall approval for
+  `unrs-resolver`; lint, build, and runtime validation all passed.
+
+## AJA-004 — Add database and demo identity
+
+- Milestone: MILESTONE 1 — Database and Seeded Users
+- Status: Ready
+- Owner: AI
+- External issue: Not created; no Jira or ClickUp integration was used
+- Base branch: task/AJA-003-nextjs-foundation (contains approved local Milestone 0 work; it has not been merged because no merge authorization was requested)
+- Task branch: task/AJA-004-database-demo-identity
+- Pull request: Not created
+- Commits: Not committed
+- Created: 2026-08-28
+- Updated: 2026-08-28
+
+### Outcome
+
+The application has its locked Prisma/PostgreSQL data model, an idempotent seed
+for Alex, Sam, and Jordan, and a server-backed demo-user switcher using an
+HTTP-only cookie.
+
+### Scope
+
+- Configure Prisma for PostgreSQL/Supabase and add the User, Document, and
+  DocumentShare models with locked relations and constraints.
+- Add a migration and idempotent seed script for the three fixed demo users.
+- Add server-only current-user resolution with a safe Alex fallback.
+- Add a server action and accessible UI to select a seeded demo user.
+- Add setup documentation and scripts for generation, migration, and seeding.
+
+### Out of Scope
+
+- Document dashboard, creation, rename, content editing, importing, and sharing UI.
+- Production authentication or authorization beyond resolving the demo identity.
+- Connecting to, modifying, or exposing any database credentials in source control.
+
+### Dependencies
+
+- A Supabase PostgreSQL `DATABASE_URL` in local `.env` is required to apply the
+  migration, run the seed, and verify live connectivity. No local URL is currently configured.
+
+### Acceptance Criteria
+
+- [ ] Prisma schema has CUID string IDs, PostgreSQL datasource, locked relations,
+  cascade/restrict behavior, and a unique document-share pair.
+- [ ] A migration and idempotent seed define exactly Alex, Sam, and Jordan by stable email.
+- [ ] The selected seeded user is written only by server-side code to an HTTP-only cookie.
+- [ ] The switcher preserves a valid selection across refresh and defaults invalid or absent cookies to Alex.
+- [ ] Generated client, lint, and build validation pass.
+- [ ] With a supplied local Supabase connection, migration, seed, and connectivity verification pass.
+- [ ] No document/editor behavior is implemented.
+
+### Implementation Notes
+
+- Pending implementation.
+
+### Validation Evidence
+
+| Command/check | Result | Date |
+|---|---|---|
+| Not run | Pending | 2026-08-28 |
+
+### Manual QA
+
+1. Configure `DATABASE_URL` in an uncommitted `.env`, then run the documented migration and seed commands.
+   - Expected: The three demo users exist once; rerunning the seed does not duplicate them.
+2. Run the app and switch between Alex, Sam, and Jordan.
+   - Expected: The selected user is shown and remains selected after a refresh.
+3. Replace the cookie with an invalid value, then refresh.
+   - Expected: The app safely falls back to Alex.
+
+### QA Result
+
 - Status: Pending
 - Tested by: Pending user QA
 - Date: Pending
@@ -306,10 +391,7 @@ including a basic product shell and documented local setup.
 
 ### Known Limitations
 
-- The foundation intentionally contains no persistence, identity, document,
-  editor, import, or sharing functionality; those are planned for later milestones.
-- `npm install` reported a non-blocking pending optional postinstall approval for
-  `unrs-resolver`; lint, build, and runtime validation all passed.
+- Live database validation is blocked until a Supabase PostgreSQL connection string is provided in local `.env`.
 
 ## Task Template
 
