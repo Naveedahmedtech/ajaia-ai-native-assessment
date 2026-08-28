@@ -6,7 +6,11 @@ https://github.com/Naveedahmedtech/ajaia-ai-native-assessment
 
 ## Live application
 
-Not deployed yet. Vercel requires `vercel login` and production `DATABASE_URL` configuration.
+https://ajaia-ai-native-assessment.vercel.app/
+
+The deployment responds successfully from Vercel. The production database and
+seeded demo data must remain configured in Vercel environment variables for the
+full workflow to operate.
 
 ## Demo users
 
@@ -27,7 +31,6 @@ Alex (`alex@example.com`), Sam (`sam@example.com`), and Jordan (`jordan@example.
 
 ## Known limitations
 
-- No production URL until Vercel authentication/configuration is completed.
 - Demo identity is simulated, not production authentication.
 - Manual end-to-end QA and task-status cleanup remain before final submission.
 - Real-time concurrent editing, presence, CRDTs, comments, DOCX import, and PDF export are out of scope.
