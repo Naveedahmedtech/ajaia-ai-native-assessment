@@ -14,7 +14,8 @@ and completion rules.
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
 | AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
 | AJA-006 | Add rich-text editor persistence | Milestone 3 | Done | task/AJA-006-rich-text-editor | Not created |
-| AJA-007 | Add TXT import | Milestone 4 | Ready for QA | task/AJA-007-txt-import | Not created |
+| AJA-007 | Add TXT import | Milestone 4 | Done | task/AJA-007-txt-import | Not created |
+| AJA-008 | Add document sharing | Milestone 5 | Ready | task/AJA-008-document-sharing | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -605,6 +606,31 @@ Users can import a valid TXT file as a persisted editable document.
    - Expected: A persisted editable document opens with paragraphs preserved.
 2. Try a non-TXT file, a file over 1 MiB, a NUL-containing file, and whitespace-only text.
    - Expected: Browser or server validation rejects the file without creating a document.
+
+## AJA-008 — Add document sharing
+
+- Milestone: MILESTONE 5 — Sharing
+- Status: Ready
+- Base branch: task/AJA-007-txt-import
+- Task branch: task/AJA-008-document-sharing
+- Commits: Not committed
+
+### Outcome
+
+Owners can share documents with another seeded user; recipients can edit, while unshared users remain inaccessible.
+
+### Scope
+
+- Owner-only server sharing action and UI, shared document listing, and authorization enforcement.
+
+### Acceptance Criteria
+
+- [ ] Alex can share with Sam; Sam can edit; Jordan cannot access.
+
+### Manual QA
+
+1. Share an Alex document with Sam and switch users.
+   - Expected: Sam sees it under Shared With Me and can edit it.
 
 ## Task Template
 
