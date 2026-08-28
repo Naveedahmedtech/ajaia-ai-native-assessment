@@ -15,7 +15,7 @@ and completion rules.
 | AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
 | AJA-006 | Add rich-text editor persistence | Milestone 3 | Done | task/AJA-006-rich-text-editor | Not created |
 | AJA-007 | Add TXT import | Milestone 4 | Done | task/AJA-007-txt-import | Not created |
-| AJA-008 | Add document sharing | Milestone 5 | Ready | task/AJA-008-document-sharing | Not created |
+| AJA-008 | Add document sharing | Milestone 5 | Ready for QA | task/AJA-008-document-sharing | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -610,10 +610,10 @@ Users can import a valid TXT file as a persisted editable document.
 ## AJA-008 — Add document sharing
 
 - Milestone: MILESTONE 5 — Sharing
-- Status: Ready
+- Status: Ready for QA
 - Base branch: task/AJA-007-txt-import
 - Task branch: task/AJA-008-document-sharing
-- Commits: Not committed
+- Commits: `1b9f79b` — sharing action; `e356bbb` — recipient filtering
 
 ### Outcome
 
@@ -625,12 +625,14 @@ Owners can share documents with another seeded user; recipients can edit, while 
 
 ### Acceptance Criteria
 
-- [ ] Alex can share with Sam; Sam can edit; Jordan cannot access.
+- [ ] Manual QA: Alex can share with Sam; Sam can edit; Jordan cannot access.
 
 ### Manual QA
 
 1. Share an Alex document with Sam and switch users.
    - Expected: Sam sees it under Shared With Me and can edit it.
+2. Switch to Jordan and enter the shared document URL.
+   - Expected: The not-found state appears; no content is disclosed.
 
 ## Task Template
 
