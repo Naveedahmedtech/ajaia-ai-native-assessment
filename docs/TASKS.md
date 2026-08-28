@@ -12,7 +12,8 @@ and completion rules.
 | AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
-| AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Ready for QA | task/AJA-005-dashboard-document-lifecycle | Not created |
+| AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
+| AJA-006 | Add rich-text editor persistence | Milestone 3 | Ready | task/AJA-006-rich-text-editor | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -420,7 +421,7 @@ HTTP-only cookie.
 ## AJA-005 — Build dashboard and document lifecycle
 
 - Milestone: MILESTONE 2 — Dashboard and Document Creation
-- Status: Ready for QA
+- Status: Done
 - Owner: AI
 - External issue: Not created
 - Base branch: task/AJA-004-database-demo-identity
@@ -492,6 +493,71 @@ are listed separately and protected by server-side access checks.
 
 ### QA Result
 
+- Status: Passed
+- Tested by: User
+- Date: 2026-08-28
+- Actual result: User approved Milestone 2 and instructed work to move forward.
+- Evidence/notes: Approval received in the assessment session.
+
+### Known Limitations
+
+- Content editing, import, and sharing management are planned for later milestones.
+- The dashboard is intentionally minimal; rename validation feedback is not yet
+  rendered inline and will be refined with later form-feedback work.
+
+## AJA-006 — Add rich-text editor persistence
+
+- Milestone: MILESTONE 3 — Rich Text Editor
+- Status: Ready
+- Owner: AI
+- External issue: Not created
+- Base branch: task/AJA-005-dashboard-document-lifecycle
+- Task branch: task/AJA-006-rich-text-editor
+- Pull request: Not created
+- Commits: Not committed
+- Created: 2026-08-28
+- Updated: 2026-08-28
+
+### Outcome
+
+Accessible document users can edit required Tiptap rich text and persist structured JSON through a 750 ms debounced autosave.
+
+### Scope
+
+- Tiptap toolbar and structured JSON persistence with server-side access checks.
+- 750 ms autosave, pending/saved/failed status, retry, size validation, and safe stale-response handling.
+
+### Out of Scope
+
+- TXT import, sharing UI, real-time collaboration, comments, and version history.
+
+### Dependencies
+
+- AJA-005 approved document routes.
+
+### Acceptance Criteria
+
+- [ ] Required formatting persists after refresh for owner and shared user.
+- [ ] Autosave is debounced, retryable, and does not let stale responses clear newer changes.
+- [ ] Content over 2 MiB is safely rejected without loss.
+
+### Implementation Notes
+
+- Pending implementation.
+
+### Validation Evidence
+
+| Command/check | Result | Date |
+|---|---|---|
+| Not run | Pending | 2026-08-28 |
+
+### Manual QA
+
+1. Create/open a document, edit and format content, then refresh.
+   - Expected: Content and formatting persist.
+
+### QA Result
+
 - Status: Pending
 - Tested by: Pending user QA
 - Date: Pending
@@ -500,9 +566,7 @@ are listed separately and protected by server-side access checks.
 
 ### Known Limitations
 
-- Content editing, import, and sharing management are planned for later milestones.
-- The dashboard is intentionally minimal; rename validation feedback is not yet
-  rendered inline and will be refined with later form-feedback work.
+- Pending implementation.
 
 ## Task Template
 
