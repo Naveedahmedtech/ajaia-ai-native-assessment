@@ -14,7 +14,7 @@ and completion rules.
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
 | AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
 | AJA-006 | Add rich-text editor persistence | Milestone 3 | Done | task/AJA-006-rich-text-editor | Not created |
-| AJA-007 | Add TXT import | Milestone 4 | Ready | task/AJA-007-txt-import | Not created |
+| AJA-007 | Add TXT import | Milestone 4 | In Progress | task/AJA-007-txt-import | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 

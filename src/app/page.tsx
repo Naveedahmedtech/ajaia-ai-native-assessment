@@ -1,6 +1,7 @@
 import { UserSwitcher } from "@/components/user-switcher";
 import { getCurrentUser, getDemoUsers } from "@/lib/current-user";
 import { createDocument } from "@/app/actions/documents";
+import { importTextDocument } from "@/app/actions/import";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -29,7 +30,7 @@ export default async function Home() {
             Viewing as {currentUser.name}.
           </p>
         </section>
-        <form action={createDocument}><button className="theme-surface rounded-lg border px-4 py-2 font-medium">New document</button></form>
+        <div className="flex flex-wrap gap-3"><form action={createDocument}><button className="theme-surface rounded-lg border px-4 py-2 font-medium">New document</button></form><form action={importTextDocument} className="flex gap-2"><label className="theme-surface cursor-pointer rounded-lg border px-4 py-2 font-medium">Import .txt<input accept=".txt,text/plain" className="sr-only" name="file" type="file" /></label><button className="editor-button" type="submit">Import</button></form></div>
         <section><h2 className="text-2xl font-semibold">My Documents</h2><div className="mt-4 grid gap-3">{owned.length ? owned.map((d) => <Link className="theme-surface rounded-lg border p-4" href={`/documents/${d.id}`} key={d.id}>{d.title}</Link>) : <p className="theme-muted">Create your first document.</p>}</div></section>
         <section><h2 className="text-2xl font-semibold">Shared With Me</h2><div className="mt-4 grid gap-3">{shared.length ? shared.map((d) => <Link className="theme-surface rounded-lg border p-4" href={`/documents/${d.id}`} key={d.id}>{d.title}</Link>) : <p className="theme-muted">No documents have been shared with you.</p>}</div></section>
       </div>
