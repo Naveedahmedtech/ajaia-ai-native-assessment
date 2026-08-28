@@ -129,6 +129,8 @@ task branch before application foundation work begins.
 - Add the user-provided GitHub remote.
 - Create and push a focused, traceable baseline commit.
 - Record baseline repository status for the Milestone 0 task.
+- Add repository ignore rules for generated files, local dependencies, and
+  environment files while retaining `.env.example` for future setup guidance.
 
 ### Out of Scope
 
@@ -146,6 +148,8 @@ task branch before application foundation work begins.
 - [x] The supplied `origin` remote is configured.
 - [x] A baseline commit contains the existing repository materials and task record.
 - [x] The baseline is pushed to `origin/main`.
+- [x] A `.gitignore` protects generated files and local environment values from
+  accidental commits.
 
 ### Implementation Notes
 
@@ -154,6 +158,8 @@ task branch before application foundation work begins.
 - Baseline commit `480b444` was pushed to `origin/main`. The dedicated task
   branch was then created locally, as required before Milestone 0 application
   foundation work begins.
+- The user requested `.gitignore` after the initial QA handoff, so this task
+  returned to In Progress before the requested scoped addition.
 
 ### Validation Evidence
 
@@ -162,6 +168,8 @@ task branch before application foundation work begins.
 | `git status --short --branch` after push | Passed; `main` tracks `origin/main` | 2026-08-28 |
 | `git remote -v` | Passed; fetch and push URLs match the supplied repository | 2026-08-28 |
 | `git log -1 --oneline` | Passed; `480b444 AJA-002: establish repository baseline` | 2026-08-28 |
+| `git diff --check` | Passed; no whitespace errors | 2026-08-28 |
+| `git check-ignore -v --no-index node_modules .next .env .env.example` | Passed; generated files and `.env` are ignored, while the negated `.env.example` rule remains trackable | 2026-08-28 |
 
 ### Manual QA
 
@@ -169,6 +177,9 @@ task branch before application foundation work begins.
    - Expected: The baseline commit and repository documentation are visible.
 2. Inspect the repository remotes locally with `git remote -v`.
    - Expected: `origin` points to the supplied GitHub repository for fetch and push.
+3. Review `.gitignore`.
+   - Expected: Next.js output, dependencies, local `.env*` files, Vercel state,
+     logs, and OS files are ignored; `.env.example` is explicitly retained.
 
 ### QA Result
 
