@@ -2,6 +2,24 @@
 
 :root {
   color-scheme: light;
+  --canvas: #f8fafc;
+  --surface: #ffffff;
+  --foreground: #0f172a;
+  --muted: #475569;
+  --border: #e2e8f0;
+  --accent: #4f46e5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --canvas: #0f172a;
+    --surface: #172033;
+    --foreground: #f8fafc;
+    --muted: #cbd5e1;
+    --border: #334155;
+    --accent: #a5b4fc;
+  }
 }
 
 * {
@@ -11,5 +29,24 @@
 body {
   margin: 0;
   min-width: 320px;
-  background: #f8fafc;
+  background: var(--canvas);
+  color: var(--foreground);
+}
+
+.app-shell {
+  background: var(--canvas);
+  color: var(--foreground);
+}
+
+.theme-surface {
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+.theme-muted {
+  color: var(--muted);
+}
+
+.theme-accent {
+  color: var(--accent);
 }
