@@ -4,7 +4,7 @@ A lightweight collaborative document editor built for the Ajaia AI-Native Full S
 
 ## Current status
 
-The core workflow is implemented and verified locally. The repository is public, but a production Vercel URL has not yet been configured because Vercel authentication and a production database connection are still required.
+The core workflow is implemented and deployed on Vercel. The deployment URL is https://ajaia-ai-native-assessment.vercel.app/; it requires the production Supabase pooler `DATABASE_URL` to be configured in Vercel.
 
 ## Stack
 
