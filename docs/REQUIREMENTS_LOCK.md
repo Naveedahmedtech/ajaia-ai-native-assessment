@@ -360,6 +360,10 @@ verified.
 Approved on 2026-08-28: show a document's accurate, persisted **last saved by**
 name and timestamp. This is not presence, does not imply simultaneous editing,
 and must not use WebSockets, polling, CRDTs, or simulated collaborators.
+
+Approved on 2026-08-28: add a lightweight document version history that records
+content snapshots on save and lets an authorized user inspect prior snapshots.
+Restoration, diffing, comments, and branching are not included in this stretch.
 - AI writing features
 - Redis, queues, Kafka, microservices, or Docker orchestration
 
