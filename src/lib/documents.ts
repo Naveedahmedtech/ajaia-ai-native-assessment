@@ -11,6 +11,6 @@ export function normalizeTitle(value: string) {
 export async function getAccessibleDocument(documentId: string, userId: string) {
   return prisma.document.findFirst({
     where: { id: documentId, OR: [{ ownerId: userId }, { shares: { some: { userId } } }] },
-    include: { owner: { select: { name: true } } },
+    include: { owner: { select: { name: true } }, shares: { select: { userId: true } } },
   });
 }
