@@ -11,7 +11,7 @@ and completion rules.
 | AJA-001 | Lock task, Git, and QA delivery workflow | Pre-implementation | Ready for QA | Not available | Not created |
 | AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
-| AJA-004 | Add database and demo identity | Milestone 1 | In Progress | task/AJA-004-database-demo-identity | Not created |
+| AJA-004 | Add database and demo identity | Milestone 1 | Ready for QA | task/AJA-004-database-demo-identity | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -315,13 +315,13 @@ including a basic product shell and documented local setup.
 ## AJA-004 — Add database and demo identity
 
 - Milestone: MILESTONE 1 — Database and Seeded Users
-- Status: In Progress
+- Status: Ready for QA
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
 - Base branch: task/AJA-003-nextjs-foundation (contains approved local Milestone 0 work; it has not been merged because no merge authorization was requested)
 - Task branch: task/AJA-004-database-demo-identity
 - Pull request: Not created
-- Commits: Not committed
+- Commits: `90f93f7` — `AJA-004: add database and demo identity foundation`; pending QA-handoff commit
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
@@ -353,24 +353,45 @@ HTTP-only cookie.
 
 ### Acceptance Criteria
 
-- [ ] Prisma schema has CUID string IDs, PostgreSQL datasource, locked relations,
+- [x] Prisma schema has CUID string IDs, PostgreSQL datasource, locked relations,
   cascade/restrict behavior, and a unique document-share pair.
-- [ ] A migration and idempotent seed define exactly Alex, Sam, and Jordan by stable email.
-- [ ] The selected seeded user is written only by server-side code to an HTTP-only cookie.
-- [ ] The switcher preserves a valid selection across refresh and defaults invalid or absent cookies to Alex.
-- [ ] Generated client, lint, and build validation pass.
-- [ ] With a supplied local Supabase connection, migration, seed, and connectivity verification pass.
-- [ ] No document/editor behavior is implemented.
+- [x] A migration and idempotent seed define exactly Alex, Sam, and Jordan by stable email.
+- [x] The selected seeded user is written only by server-side code to an HTTP-only cookie.
+- [ ] Manual QA: the switcher preserves a valid selection across refresh and defaults invalid or absent cookies to Alex.
+- [x] Generated client, lint, and build validation pass.
+- [x] With a supplied local Supabase connection, migration, seed, and connectivity verification pass.
+- [x] No document/editor behavior is implemented.
 
 ### Implementation Notes
 
-- Pending implementation.
+- Added Prisma 7.10 with the PostgreSQL driver adapter and a schema configured
+  through `prisma.config.ts`.
+- Added migration `20260828105654_init`, which creates the locked tables,
+  constraints, and foreign-key behavior.
+- Added idempotent user upserts for Alex, Sam, and Jordan and confirmed a repeat
+  seed succeeds without duplication.
+- Added current-user resolution and a server action that validates the selected
+  seeded user before writing an HTTP-only, same-site cookie.
+- The runtime response confirmed all three users are available and Alex is the
+  fallback selection. Cookie selection persistence requires the documented
+  manual QA browser check.
+
+### Files Changed
+
+- `prisma/schema.prisma`, `prisma.config.ts`, `prisma/seed.ts`, and the initial migration
+- `src/lib/*`, `src/app/actions/demo-user.ts`, and `src/components/user-switcher.tsx`
+- `src/app/page.tsx`, package configuration, `.env.example`, `.gitignore`, README, and this task register
 
 ### Validation Evidence
 
 | Command/check | Result | Date |
 |---|---|---|
-| Not run | Pending | 2026-08-28 |
+| `npx prisma migrate status` | Passed; one migration found and database schema is up to date | 2026-08-28 |
+| `npm run db:seed` (repeat run) | Passed; Alex, Sam, and Jordan seeded idempotently | 2026-08-28 |
+| `npm run lint` | Passed | 2026-08-28 |
+| `npm run build` | Passed with configured local `.env`; generated client and dynamic root route compiled | 2026-08-28 |
+| Local `GET /` | Passed; 200 response rendered Alex, Sam, and Jordan selector options with Alex selected | 2026-08-28 |
+| `npm test` | Not run; test milestone has not started and no test script exists yet | 2026-08-28 |
 
 ### Manual QA
 
@@ -391,7 +412,9 @@ HTTP-only cookie.
 
 ### Known Limitations
 
-- Live database validation is blocked until a Supabase PostgreSQL connection string is provided in local `.env`.
+- This is simulated demo identity, not production authentication.
+- No document/dashboard/editor behavior has been added; the current page only
+  establishes the selected demo-user context.
 
 ## Task Template
 
