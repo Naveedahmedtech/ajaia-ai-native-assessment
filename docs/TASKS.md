@@ -16,7 +16,8 @@ and completion rules.
 | AJA-006 | Add rich-text editor persistence | Milestone 3 | Done | task/AJA-006-rich-text-editor | Not created |
 | AJA-007 | Add TXT import | Milestone 4 | Done | task/AJA-007-txt-import | Not created |
 | AJA-008 | Add document sharing | Milestone 5 | Done | task/AJA-008-document-sharing | Not created |
-| AJA-009 | Add authorization tests | Milestone 6 | Ready | task/AJA-009-authorization-tests | Not created |
+| AJA-009 | Add authorization tests | Milestone 6 | Done | task/AJA-009-authorization-tests | Not created |
+| AJA-010 | Polish UX and reliability | Milestone 7 | Ready | task/AJA-010-ux-reliability | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
