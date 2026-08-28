@@ -14,7 +14,7 @@ and completion rules.
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
 | AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
 | AJA-006 | Add rich-text editor persistence | Milestone 3 | Done | task/AJA-006-rich-text-editor | Not created |
-| AJA-007 | Add TXT import | Milestone 4 | In Progress | task/AJA-007-txt-import | Not created |
+| AJA-007 | Add TXT import | Milestone 4 | Ready for QA | task/AJA-007-txt-import | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -578,10 +578,10 @@ Accessible document users can edit required Tiptap rich text and persist structu
 ## AJA-007 — Add TXT import
 
 - Milestone: MILESTONE 4 — TXT File Import
-- Status: Ready
+- Status: Ready for QA
 - Base branch: task/AJA-006-rich-text-editor
 - Task branch: task/AJA-007-txt-import
-- Commits: Not committed
+- Commits: `d8ce8ce` — server TXT import; `7709607` — browser validation
 
 ### Outcome
 
@@ -597,12 +597,14 @@ Users can import a valid TXT file as a persisted editable document.
 
 ### Acceptance Criteria
 
-- [ ] Valid TXT imports as an owned document; invalid, oversized, binary, and empty files are rejected.
+- [ ] Manual QA: valid TXT imports as an owned document; invalid, oversized, binary, and empty files are rejected.
 
 ### Manual QA
 
 1. Import `notes.txt` containing multiple paragraphs.
    - Expected: A persisted editable document opens with paragraphs preserved.
+2. Try a non-TXT file, a file over 1 MiB, a NUL-containing file, and whitespace-only text.
+   - Expected: Browser or server validation rejects the file without creating a document.
 
 ## Task Template
 
