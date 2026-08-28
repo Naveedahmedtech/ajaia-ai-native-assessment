@@ -13,7 +13,7 @@ and completion rules.
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
 | AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
-| AJA-006 | Add rich-text editor persistence | Milestone 3 | Ready | task/AJA-006-rich-text-editor | Not created |
+| AJA-006 | Add rich-text editor persistence | Milestone 3 | In Progress | task/AJA-006-rich-text-editor | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -508,7 +508,7 @@ are listed separately and protected by server-side access checks.
 ## AJA-006 — Add rich-text editor persistence
 
 - Milestone: MILESTONE 3 — Rich Text Editor
-- Status: Ready
+- Status: In Progress
 - Owner: AI
 - External issue: Not created
 - Base branch: task/AJA-005-dashboard-document-lifecycle
