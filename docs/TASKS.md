@@ -10,7 +10,7 @@ and completion rules.
 |---|---|---:|---|---|---|
 | AJA-001 | Lock task, Git, and QA delivery workflow | Pre-implementation | Ready for QA | Not available | Not created |
 | AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
-| AJA-003 | Build Next.js application foundation | Milestone 0 | Ready | task/AJA-003-nextjs-foundation | Not created |
+| AJA-003 | Build Next.js application foundation | Milestone 0 | Ready for QA | task/AJA-003-nextjs-foundation | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -200,14 +200,14 @@ task branch before application foundation work begins.
 ## AJA-003 — Build Next.js application foundation
 
 - Milestone: MILESTONE 0 — Repository and Foundation
-- Status: Ready
+- Status: Ready for QA
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
 - Base branch: task/AJA-002-repository-foundation (contains the approved local
   bootstrap work; it has not been merged because no merge authorization was requested)
 - Task branch: task/AJA-003-nextjs-foundation
 - Pull request: Not created
-- Commits: Not committed
+- Commits: Pending final task commit
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
@@ -236,27 +236,46 @@ including a basic product shell and documented local setup.
 
 ### Acceptance Criteria
 
-- [ ] `npm install` succeeds from a clean checkout.
-- [ ] `npm run dev` starts the application.
-- [ ] `npm run lint` passes.
-- [ ] `npm run build` passes.
-- [ ] The application shell renders successfully.
-- [ ] No document, database, or editor behavior is implemented.
+- [x] `npm install` succeeds from a clean checkout.
+- [x] `npm run dev` starts the application.
+- [x] `npm run lint` passes.
+- [x] `npm run build` passes.
+- [x] The application shell renders successfully.
+- [x] No document, database, or editor behavior is implemented.
 
 ### Implementation Notes
 
-- Pending implementation.
+- Added the Next.js 16.3.3 App Router foundation with TypeScript, Tailwind CSS,
+  ESLint, and a static responsive landing shell.
+- Added `.env.example` as a non-secret future database configuration placeholder
+  and README instructions for setup and validation.
+- Next.js automatically appended a compatibility note to `AGENTS.md` when the
+  development server first ran; it is retained because the framework will
+  otherwise regenerate it.
+- No database, identity, document, editor, import, or sharing behavior was
+  added.
+
+### Files Changed
+
+- `.env.example`, `README.md`, `package.json`, and `package-lock.json`
+- Next.js, TypeScript, ESLint, and PostCSS configuration files
+- `src/app/layout.tsx`, `src/app/page.tsx`, and `src/app/globals.css`
+- `AGENTS.md` and this task register
 
 ### Validation Evidence
 
 | Command/check | Result | Date |
 |---|---|---|
-| Not run | Pending | 2026-08-28 |
+| `npm install` | Passed; 359 packages added, audit reported 0 vulnerabilities | 2026-08-28 |
+| `npm run lint` | Passed | 2026-08-28 |
+| `npm run build` | Passed; static `/` route compiled and prerendered | 2026-08-28 |
+| `npm run dev` + local HTTP request | Passed; `GET /` returned 200 with expected shell content | 2026-08-28 |
+| `npm test` | Not run; no test script exists in the foundation task | 2026-08-28 |
 
 ### Manual QA
 
-1. Run `npm run dev` and open the local URL shown in the terminal.
-   - Expected: A responsive application shell loads without console or runtime errors.
+1. Run `npm install`, then `npm run dev`, and open [http://localhost:3000](http://localhost:3000).
+   - Expected: A responsive Ajaia Docs foundation shell loads without console or runtime errors.
 2. Run `npm run lint` and `npm run build`.
    - Expected: Both commands exit successfully.
 3. Inspect the shell.
@@ -272,7 +291,10 @@ including a basic product shell and documented local setup.
 
 ### Known Limitations
 
-- The foundation intentionally contains no persistence, identity, or document functionality.
+- The foundation intentionally contains no persistence, identity, document,
+  editor, import, or sharing functionality; those are planned for later milestones.
+- `npm install` reported a non-blocking pending optional postinstall approval for
+  `unrs-resolver`; lint, build, and runtime validation all passed.
 
 ## Task Template
 
