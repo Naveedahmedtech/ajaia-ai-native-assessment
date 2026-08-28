@@ -207,7 +207,7 @@ task branch before application foundation work begins.
   bootstrap work; it has not been merged because no merge authorization was requested)
 - Task branch: task/AJA-003-nextjs-foundation
 - Pull request: Not created
-- Commits: Pending final task commit
+- Commits: `6964e54` — `AJA-003: build Next.js application foundation`
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
