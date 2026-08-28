@@ -8,9 +8,9 @@ https://github.com/Naveedahmedtech/ajaia-ai-native-assessment
 
 https://ajaia-ai-native-assessment.vercel.app/
 
-The deployment responds successfully from Vercel. The production database and
-seeded demo data must remain configured in Vercel environment variables for the
-full workflow to operate.
+The deployment is present on Vercel, but the current deployment is returning a
+database connectivity error (`P1001`). Configure the production Supabase pooler
+connection string and redeploy before final review.
 
 ## Demo users
 
