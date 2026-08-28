@@ -11,7 +11,8 @@ and completion rules.
 | AJA-001 | Lock task, Git, and QA delivery workflow | Pre-implementation | Ready for QA | Not available | Not created |
 | AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
-| AJA-004 | Add database and demo identity | Milestone 1 | Ready for QA | task/AJA-004-database-demo-identity | Not created |
+| AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
+| AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Ready | task/AJA-005-dashboard-document-lifecycle | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -315,7 +316,7 @@ including a basic product shell and documented local setup.
 ## AJA-004 — Add database and demo identity
 
 - Milestone: MILESTONE 1 — Database and Seeded Users
-- Status: Ready for QA
+- Status: Done
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
 - Base branch: task/AJA-003-nextjs-foundation (contains approved local Milestone 0 work; it has not been merged because no merge authorization was requested)
@@ -357,7 +358,7 @@ HTTP-only cookie.
   cascade/restrict behavior, and a unique document-share pair.
 - [x] A migration and idempotent seed define exactly Alex, Sam, and Jordan by stable email.
 - [x] The selected seeded user is written only by server-side code to an HTTP-only cookie.
-- [ ] Manual QA: the switcher preserves a valid selection across refresh and defaults invalid or absent cookies to Alex.
+- [x] Manual QA: the switcher preserves a valid selection across refresh and defaults invalid or absent cookies to Alex.
 - [x] Generated client, lint, and build validation pass.
 - [x] With a supplied local Supabase connection, migration, seed, and connectivity verification pass.
 - [x] No document/editor behavior is implemented.
@@ -404,6 +405,76 @@ HTTP-only cookie.
 
 ### QA Result
 
+- Status: Passed
+- Tested by: User
+- Date: 2026-08-28
+- Actual result: User approved Milestone 1 and instructed work to move to the next task.
+- Evidence/notes: Approval received in the assessment session.
+
+### Known Limitations
+
+- This is simulated demo identity, not production authentication.
+- No document/dashboard/editor behavior has been added; the current page only
+  establishes the selected demo-user context.
+
+## AJA-005 — Build dashboard and document lifecycle
+
+- Milestone: MILESTONE 2 — Dashboard and Document Creation
+- Status: Ready
+- Owner: AI
+- External issue: Not created
+- Base branch: task/AJA-004-database-demo-identity
+- Task branch: task/AJA-005-dashboard-document-lifecycle
+- Pull request: Not created
+- Commits: Not committed
+- Created: 2026-08-28
+- Updated: 2026-08-28
+
+### Outcome
+
+Users can create, list, open, and rename their own documents; shared documents
+are listed separately and protected by server-side access checks.
+
+### Scope
+
+- Dashboard with mutually exclusive owned/shared sections ordered by `updatedAt`.
+- Create default documents, accessible document route, and owner-only rename.
+- Server-side identifier/title validation and safe 404/403 behavior.
+
+### Out of Scope
+
+- Rich-text editing, TXT import, granting shares UI, and automated tests.
+
+### Dependencies
+
+- AJA-004 approved database and demo identity.
+
+### Acceptance Criteria
+
+- [ ] Alex can create, rename, refresh, and retain a document.
+- [ ] Sam cannot discover Alex's private document.
+- [ ] Owner-only title updates trim input and reject empty or overlong titles.
+- [ ] Owned and shared sections are separately ordered by most-recent update.
+
+### Implementation Notes
+
+- Pending implementation.
+
+### Validation Evidence
+
+| Command/check | Result | Date |
+|---|---|---|
+| Not run | Pending | 2026-08-28 |
+
+### Manual QA
+
+1. As Alex, create and rename a document, then refresh.
+   - Expected: The title persists.
+2. Switch to Sam and return to the dashboard.
+   - Expected: Alex's private document is absent.
+
+### QA Result
+
 - Status: Pending
 - Tested by: Pending user QA
 - Date: Pending
@@ -412,9 +483,7 @@ HTTP-only cookie.
 
 ### Known Limitations
 
-- This is simulated demo identity, not production authentication.
-- No document/dashboard/editor behavior has been added; the current page only
-  establishes the selected demo-user context.
+- Content editing, import, and sharing management are planned for later milestones.
 
 ## Task Template
 
