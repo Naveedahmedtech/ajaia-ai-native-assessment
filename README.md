@@ -26,7 +26,14 @@ npm run build
 
 ## Environment
 
-Copy `.env.example` to `.env` when a later milestone requires local settings.
+Copy `.env.example` to `.env` and add the Supabase PostgreSQL connection string
+before starting Milestone 1 functionality:
+
+```bash
+npm run db:migrate -- --name init
+npm run db:seed
+```
+
 Do not commit `.env` files or credentials.
 
 ## Current scope

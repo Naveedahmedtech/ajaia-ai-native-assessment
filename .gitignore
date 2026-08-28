@@ -19,6 +19,7 @@
 
 # TypeScript
 *.tsbuildinfo
+/src/generated/prisma
 
 # Logs and OS files
 npm-debug.log*

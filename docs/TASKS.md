@@ -11,7 +11,7 @@ and completion rules.
 | AJA-001 | Lock task, Git, and QA delivery workflow | Pre-implementation | Ready for QA | Not available | Not created |
 | AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
-| AJA-004 | Add database and demo identity | Milestone 1 | Ready | task/AJA-004-database-demo-identity | Not created |
+| AJA-004 | Add database and demo identity | Milestone 1 | In Progress | task/AJA-004-database-demo-identity | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -315,7 +315,7 @@ including a basic product shell and documented local setup.
 ## AJA-004 — Add database and demo identity
 
 - Milestone: MILESTONE 1 — Database and Seeded Users
-- Status: Ready
+- Status: In Progress
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
 - Base branch: task/AJA-003-nextjs-foundation (contains approved local Milestone 0 work; it has not been merged because no merge authorization was requested)
