@@ -15,7 +15,7 @@ export function RichTextEditor({ documentId, initialContent }: { documentId: str
     const result = await saveDocumentContent(documentId, JSON.stringify(content));
     if (current === version.current) setStatus(result.ok ? "Saved" : "Save failed");
   };
-  const editor = useEditor({ extensions: [StarterKit, Underline], content: initialContent, onUpdate: ({ editor }) => {
+  const editor = useEditor({ immediatelyRender: false, extensions: [StarterKit.configure({ underline: false }), Underline], content: initialContent, onUpdate: ({ editor }) => {
     const current = ++version.current;
     const content = editor.getJSON();
     lastContent.current = content;
