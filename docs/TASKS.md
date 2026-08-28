@@ -19,7 +19,7 @@ and completion rules.
 | AJA-009 | Add authorization tests | Milestone 6 | Done | task/AJA-009-authorization-tests | Not created |
 | AJA-010 | Polish UX and reliability | Milestone 7 | Ready for QA | task/AJA-010-ux-reliability | Not created |
 | AJA-011 | Add document version history | Optional stretch | Done | task/AJA-011-version-history | Not created |
-| AJA-012 | Add Markdown export | Optional stretch | Ready | task/AJA-012-markdown-export | Not created |
+| AJA-012 | Add Markdown export | Optional stretch | In Progress | task/AJA-012-markdown-export | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
