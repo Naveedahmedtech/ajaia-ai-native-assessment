@@ -13,7 +13,7 @@ and completion rules.
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
 | AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
-| AJA-006 | Add rich-text editor persistence | Milestone 3 | Ready for QA | task/AJA-006-rich-text-editor | Not created |
+| AJA-006 | Add rich-text editor persistence | Milestone 3 | In Progress | task/AJA-006-rich-text-editor | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -203,7 +203,7 @@ task branch before application foundation work begins.
 ## AJA-003 — Build Next.js application foundation
 
 - Milestone: MILESTONE 0 — Repository and Foundation
-- Status: Ready for QA
+- Status: QA Failed
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
 - Base branch: task/AJA-002-repository-foundation (contains the approved local
@@ -564,11 +564,11 @@ Accessible document users can edit required Tiptap rich text and persist structu
 
 ### QA Result
 
-- Status: Pending
+- Status: Failed
 - Tested by: Pending user QA
 - Date: Pending
-- Actual result: Pending
-- Evidence/notes: Pending
+- Actual result: Editor visual hierarchy and control design felt too default and insufficiently polished.
+- Evidence/notes: User feedback received in the assessment session.
 
 ### Known Limitations
 
