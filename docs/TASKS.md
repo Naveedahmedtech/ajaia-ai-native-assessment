@@ -12,7 +12,7 @@ and completion rules.
 | AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
-| AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Ready | task/AJA-005-dashboard-document-lifecycle | Not created |
+| AJA-005 | Build dashboard and document lifecycle | Milestone 2 | In Progress | task/AJA-005-dashboard-document-lifecycle | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -420,7 +420,7 @@ HTTP-only cookie.
 ## AJA-005 — Build dashboard and document lifecycle
 
 - Milestone: MILESTONE 2 — Dashboard and Document Creation
-- Status: Ready
+- Status: In Progress
 - Owner: AI
 - External issue: Not created
 - Base branch: task/AJA-004-database-demo-identity

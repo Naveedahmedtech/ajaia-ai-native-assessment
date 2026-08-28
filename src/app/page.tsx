@@ -1,16 +1,16 @@
 import { UserSwitcher } from "@/components/user-switcher";
 import { getCurrentUser, getDemoUsers } from "@/lib/current-user";
+import { createDocument } from "@/app/actions/documents";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
-const foundationItems = [
-  "Shared document workspace",
-  "Server-enforced access control",
-  "Rich-text editing and persistence",
-];
-
 export default async function Home() {
   const [currentUser, users] = await Promise.all([getCurrentUser(), getDemoUsers()]);
+  const [owned, shared] = await Promise.all([
+    (await import("@/lib/prisma")).prisma.document.findMany({ where: { ownerId: currentUser.id }, orderBy: { updatedAt: "desc" } }),
+    (await import("@/lib/prisma")).prisma.document.findMany({ where: { ownerId: { not: currentUser.id }, shares: { some: { userId: currentUser.id } } }, orderBy: { updatedAt: "desc" } }),
+  ]);
 
   return (
     <main className="app-shell min-h-screen px-6 py-8 sm:px-10 sm:py-12">
@@ -24,24 +24,14 @@ export default async function Home() {
           <p className="theme-accent mb-4 text-sm font-medium uppercase tracking-[0.18em]">
             Collaborative document editor
           </p>
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
-            A focused workspace for documents that move work forward.
-          </h1>
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">Your documents.</h1>
           <p className="theme-muted mt-6 max-w-2xl text-lg leading-8">
-            Viewing as {currentUser.name}. Document lifecycle, editing, and sharing
-            will be introduced in their planned milestones.
+            Viewing as {currentUser.name}.
           </p>
         </section>
-
-        <section aria-label="Planned capabilities" className="grid gap-4 sm:grid-cols-3">
-          {foundationItems.map((item, index) => (
-            <article key={item} className="theme-surface rounded-2xl border p-6 shadow-sm">
-              <p className="theme-accent text-sm font-medium">0{index + 1}</p>
-              <h2 className="mt-8 text-lg font-semibold">{item}</h2>
-              <p className="theme-muted mt-2 text-sm leading-6">Planned for a subsequent scoped milestone.</p>
-            </article>
-          ))}
-        </section>
+        <form action={createDocument}><button className="theme-surface rounded-lg border px-4 py-2 font-medium">New document</button></form>
+        <section><h2 className="text-2xl font-semibold">My Documents</h2><div className="mt-4 grid gap-3">{owned.length ? owned.map((d) => <Link className="theme-surface rounded-lg border p-4" href={`/documents/${d.id}`} key={d.id}>{d.title}</Link>) : <p className="theme-muted">Create your first document.</p>}</div></section>
+        <section><h2 className="text-2xl font-semibold">Shared With Me</h2><div className="mt-4 grid gap-3">{shared.length ? shared.map((d) => <Link className="theme-surface rounded-lg border p-4" href={`/documents/${d.id}`} key={d.id}>{d.title}</Link>) : <p className="theme-muted">No documents have been shared with you.</p>}</div></section>
       </div>
     </main>
   );
