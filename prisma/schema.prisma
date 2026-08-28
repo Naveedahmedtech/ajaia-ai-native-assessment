@@ -27,7 +27,16 @@ model Document {
   lastSavedById String?
   owner     User            @relation("DocumentOwner", fields: [ownerId], references: [id], onDelete: Restrict)
   shares    DocumentShare[]
+  versions  DocumentVersion[]
   lastSavedBy User? @relation("DocumentLastSavedBy", fields: [lastSavedById], references: [id], onDelete: SetNull)
+}
+
+model DocumentVersion {
+  id         String   @id @default(cuid())
+  documentId String
+  content    Json
+  createdAt  DateTime @default(now())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
 }
 
 model DocumentShare {

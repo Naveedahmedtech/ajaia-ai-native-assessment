@@ -13,6 +13,9 @@ export async function saveDocumentContent(documentId: string, content: unknown) 
   const user = await getCurrentUser();
   const document = await prisma.document.findFirst({ where: { id: documentId, OR: [{ ownerId: user.id }, { shares: { some: { userId: user.id } } }] }, select: { id: true } });
   if (!document) return { ok: false, error: "Document not found." };
-  await prisma.document.update({ where: { id: document.id }, data: { content: content as never, lastSavedById: user.id } });
+  await prisma.$transaction([
+    prisma.document.update({ where: { id: document.id }, data: { content: content as never, lastSavedById: user.id } }),
+    prisma.documentVersion.create({ data: { documentId: document.id, content: content as never } }),
+  ]);
   return { ok: true };
 }
