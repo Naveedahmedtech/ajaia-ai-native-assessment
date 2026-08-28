@@ -13,7 +13,8 @@ and completion rules.
 | AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
 | AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
 | AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
-| AJA-006 | Add rich-text editor persistence | Milestone 3 | In Progress | task/AJA-006-rich-text-editor | Not created |
+| AJA-006 | Add rich-text editor persistence | Milestone 3 | Done | task/AJA-006-rich-text-editor | Not created |
+| AJA-007 | Add TXT import | Milestone 4 | Ready | task/AJA-007-txt-import | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -508,7 +509,7 @@ are listed separately and protected by server-side access checks.
 ## AJA-006 — Add rich-text editor persistence
 
 - Milestone: MILESTONE 3 — Rich Text Editor
-- Status: Ready for QA
+- Status: Done
 - Owner: AI
 - External issue: Not created
 - Base branch: task/AJA-005-dashboard-document-lifecycle
@@ -573,6 +574,35 @@ Accessible document users can edit required Tiptap rich text and persist structu
 ### Known Limitations
 
 - Pending implementation.
+
+## AJA-007 — Add TXT import
+
+- Milestone: MILESTONE 4 — TXT File Import
+- Status: Ready
+- Base branch: task/AJA-006-rich-text-editor
+- Task branch: task/AJA-007-txt-import
+- Commits: Not committed
+
+### Outcome
+
+Users can import a valid TXT file as a persisted editable document.
+
+### Scope
+
+- Client/server TXT validation, UTF-8 decoding, title derivation, and structured-content persistence.
+
+### Out of Scope
+
+- DOCX, object storage, and sharing UI.
+
+### Acceptance Criteria
+
+- [ ] Valid TXT imports as an owned document; invalid, oversized, binary, and empty files are rejected.
+
+### Manual QA
+
+1. Import `notes.txt` containing multiple paragraphs.
+   - Expected: A persisted editable document opens with paragraphs preserved.
 
 ## Task Template
 
