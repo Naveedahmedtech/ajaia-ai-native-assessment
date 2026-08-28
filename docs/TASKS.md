@@ -109,7 +109,7 @@ requires user approval before the task is done or merged.
 ## AJA-002 — Initialize repository baseline
 
 - Milestone: MILESTONE 0 — Repository and Foundation
-- Status: Ready for QA
+- Status: Done
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
 - Base branch: main
@@ -207,7 +207,9 @@ task branch before application foundation work begins.
   bootstrap work; it has not been merged because no merge authorization was requested)
 - Task branch: task/AJA-003-nextjs-foundation
 - Pull request: Not created
-- Commits: `6964e54` — `AJA-003: build Next.js application foundation`
+- Commits: `6964e54` — `AJA-003: build Next.js application foundation`;
+  `2b5c2d6` — `AJA-003: record foundation validation`; `5eebc49` —
+  `AJA-003: add system color themes`
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
@@ -222,6 +224,8 @@ including a basic product shell and documented local setup.
 - Add a minimal responsive application shell for the future document editor.
 - Add `.env.example` with configuration placeholders only.
 - Add README instructions for install, development, linting, and production build.
+- Support light and dark color schemes from the system preference, using
+  semantic CSS theme tokens rather than component-level color values.
 - Verify the required foundation commands.
 
 ### Out of Scope
@@ -242,6 +246,8 @@ including a basic product shell and documented local setup.
 - [x] `npm run build` passes.
 - [x] The application shell renders successfully.
 - [x] No document, database, or editor behavior is implemented.
+- [x] The application shell supports system light and dark color schemes.
+- [x] Component markup uses semantic theme classes rather than direct color utilities.
 
 ### Implementation Notes
 
@@ -254,6 +260,10 @@ including a basic product shell and documented local setup.
   otherwise regenerate it.
 - No database, identity, document, editor, import, or sharing behavior was
   added.
+- The user requested light/dark support after the first QA handoff, returning
+  the task to In Progress. The finished implementation uses system-aware CSS
+  custom properties for semantic canvas, surface, foreground, muted, border,
+  and accent roles; component markup no longer uses direct color utilities.
 
 ### Files Changed
 
@@ -271,6 +281,9 @@ including a basic product shell and documented local setup.
 | `npm run build` | Passed; static `/` route compiled and prerendered | 2026-08-28 |
 | `npm run dev` + local HTTP request | Passed; `GET /` returned 200 with expected shell content | 2026-08-28 |
 | `npm test` | Not run; no test script exists in the foundation task | 2026-08-28 |
+| Theme update: `npm run lint` | Passed | 2026-08-28 |
+| Theme update: `npm run build` | Passed; static `/` route compiled and prerendered | 2026-08-28 |
+| Direct component color utility scan | Passed; no slate, indigo, or white color utilities remain in `src/app` | 2026-08-28 |
 
 ### Manual QA
 
@@ -279,7 +292,9 @@ including a basic product shell and documented local setup.
 2. Run `npm run lint` and `npm run build`.
    - Expected: Both commands exit successfully.
 3. Inspect the shell.
-   - Expected: It contains no document creation, editor, database, or sharing functionality.
+   - Expected: It adapts to the operating system's light/dark preference and contains no document creation, editor, database, or sharing functionality.
+4. Change the operating system or browser emulation preference between light and dark mode, then refresh the page.
+   - Expected: The shell uses the corresponding canvas, surface, text, border, and accent colors without a component-level theme toggle.
 
 ### QA Result
 
