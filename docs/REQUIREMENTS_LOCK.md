@@ -364,6 +364,9 @@ and must not use WebSockets, polling, CRDTs, or simulated collaborators.
 Approved on 2026-08-28: add a lightweight document version history that records
 content snapshots on save and lets an authorized user inspect prior snapshots.
 Restoration, diffing, comments, and branching are not included in this stretch.
+
+Approved on 2026-08-28: allow authorized users to export the current structured
+document content as Markdown. PDF export remains out of scope.
 - AI writing features
 - Redis, queues, Kafka, microservices, or Docker orchestration
 
