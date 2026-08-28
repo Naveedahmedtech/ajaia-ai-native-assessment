@@ -18,7 +18,7 @@ and completion rules.
 | AJA-008 | Add document sharing | Milestone 5 | Done | task/AJA-008-document-sharing | Not created |
 | AJA-009 | Add authorization tests | Milestone 6 | Done | task/AJA-009-authorization-tests | Not created |
 | AJA-010 | Polish UX and reliability | Milestone 7 | Ready for QA | task/AJA-010-ux-reliability | Not created |
-| AJA-011 | Add document version history | Optional stretch | In Progress | task/AJA-011-version-history | Not created |
+| AJA-011 | Add document version history | Optional stretch | Ready for QA | task/AJA-011-version-history | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -661,10 +661,10 @@ The core authorization and validation rules run through `npm test`.
 ## AJA-011 — Add document version history
 
 - Milestone: Optional stretch
-- Status: In Progress
+- Status: Ready for QA
 - Base branch: task/AJA-010-ux-reliability
 - Task branch: task/AJA-011-version-history
-- Commits: Not committed
+- Commits: `766feae` — version history and migration
 
 ### Outcome
 
@@ -680,12 +680,20 @@ Authorized users can inspect a compact chronological history of persisted docume
 
 ### Acceptance Criteria
 
-- [ ] Saving content creates an inspectable version snapshot for an authorized user.
+- [ ] Manual QA: saving content creates an inspectable version snapshot for an authorized user.
 
 ### Manual QA
 
 1. Edit and save a document twice.
    - Expected: Both saved snapshots appear chronologically.
+
+### Validation Evidence
+
+| Command/check | Result |
+|---|---|
+| Supabase migration status | Passed; schema up to date |
+| `npm run lint` | Passed |
+| `npm run build` | Passed |
 
 ## Task Template
 
