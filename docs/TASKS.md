@@ -15,7 +15,8 @@ and completion rules.
 | AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
 | AJA-006 | Add rich-text editor persistence | Milestone 3 | Done | task/AJA-006-rich-text-editor | Not created |
 | AJA-007 | Add TXT import | Milestone 4 | Done | task/AJA-007-txt-import | Not created |
-| AJA-008 | Add document sharing | Milestone 5 | Ready for QA | task/AJA-008-document-sharing | Not created |
+| AJA-008 | Add document sharing | Milestone 5 | Done | task/AJA-008-document-sharing | Not created |
+| AJA-009 | Add authorization tests | Milestone 6 | Ready | task/AJA-009-authorization-tests | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
@@ -633,6 +634,27 @@ Owners can share documents with another seeded user; recipients can edit, while 
    - Expected: Sam sees it under Shared With Me and can edit it.
 2. Switch to Jordan and enter the shared document URL.
    - Expected: The not-found state appears; no content is disclosed.
+
+## AJA-009 — Add authorization tests
+
+- Milestone: MILESTONE 6 — Automated Test
+- Status: Ready
+- Base branch: task/AJA-008-document-sharing
+- Task branch: task/AJA-009-authorization-tests
+- Commits: Not committed
+
+### Outcome
+
+The core authorization and validation rules run through `npm test`.
+
+### Acceptance Criteria
+
+- [ ] Owner/shared/unshared access and owner-only mutation rules are tested.
+
+### Manual QA
+
+1. Run `npm test`.
+   - Expected: The suite passes.
 
 ## Task Template
 
