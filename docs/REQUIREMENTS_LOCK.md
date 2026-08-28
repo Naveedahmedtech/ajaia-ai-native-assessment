@@ -344,6 +344,7 @@ verified.
 - viewer/editor sharing roles
 - simultaneous real-time editing
 - presence
+- live real-time collaboration indicators
 - WebSockets
 - CRDTs
 - comments and suggestion mode
@@ -353,6 +354,12 @@ verified.
 - object storage
 - email invitations and notifications
 - analytics
+
+## Approved Optional Stretch Exception
+
+Approved on 2026-08-28: show a document's accurate, persisted **last saved by**
+name and timestamp. This is not presence, does not imply simultaneous editing,
+and must not use WebSockets, polling, CRDTs, or simulated collaborators.
 - AI writing features
 - Redis, queues, Kafka, microservices, or Docker orchestration
 

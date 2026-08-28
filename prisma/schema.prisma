@@ -14,6 +14,7 @@ model User {
   createdAt      DateTime        @default(now())
   ownedDocuments Document[]      @relation("DocumentOwner")
   documentShares DocumentShare[]
+  lastSavedDocuments Document[] @relation("DocumentLastSavedBy")
 }
 
 model Document {
@@ -23,8 +24,10 @@ model Document {
   ownerId   String
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
+  lastSavedById String?
   owner     User            @relation("DocumentOwner", fields: [ownerId], references: [id], onDelete: Restrict)
   shares    DocumentShare[]
+  lastSavedBy User? @relation("DocumentLastSavedBy", fields: [lastSavedById], references: [id], onDelete: SetNull)
 }
 
 model DocumentShare {
