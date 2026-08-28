@@ -9,12 +9,22 @@ and completion rules.
 | ID | Title | Milestone | Status | Branch | External issue |
 |---|---|---:|---|---|---|
 | AJA-001 | Lock task, Git, and QA delivery workflow | Pre-implementation | Ready for QA | Not available | Not created |
-| AJA-002 | Initialize repository baseline | Milestone 0 | Ready | task/AJA-002-repository-foundation | Not created |
+| AJA-002 | Initialize repository baseline | Milestone 0 | Done | task/AJA-002-repository-foundation | Not created |
+| AJA-003 | Build Next.js application foundation | Milestone 0 | Done | task/AJA-003-nextjs-foundation | Not created |
+| AJA-004 | Add database and demo identity | Milestone 1 | Done | task/AJA-004-database-demo-identity | Not created |
+| AJA-005 | Build dashboard and document lifecycle | Milestone 2 | Done | task/AJA-005-dashboard-document-lifecycle | Not created |
+| AJA-006 | Add rich-text editor persistence | Milestone 3 | Done | task/AJA-006-rich-text-editor | Not created |
+| AJA-007 | Add TXT import | Milestone 4 | Done | task/AJA-007-txt-import | Not created |
+| AJA-008 | Add document sharing | Milestone 5 | Done | task/AJA-008-document-sharing | Not created |
+| AJA-009 | Add authorization tests | Milestone 6 | Done | task/AJA-009-authorization-tests | Not created |
+| AJA-010 | Polish UX and reliability | Milestone 7 | Ready for QA | task/AJA-010-ux-reliability | Not created |
+| AJA-011 | Add document version history | Optional stretch | Done | task/AJA-011-version-history | Not created |
+| AJA-012 | Add Markdown export | Optional stretch | Ready | task/AJA-012-markdown-export | Not created |
 
 ## AJA-001 — Lock task, Git, and QA delivery workflow
 
 - Milestone: Pre-implementation requirements
-- Status: Ready for QA
+- Status: Done
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
 - Base branch: Not available; workspace is not currently a Git repository
@@ -108,13 +118,15 @@ requires user approval before the task is done or merged.
 ## AJA-002 — Initialize repository baseline
 
 - Milestone: MILESTONE 0 — Repository and Foundation
-- Status: Ready
+- Status: Done
 - Owner: AI
 - External issue: Not created; no Jira or ClickUp integration was used
-- Base branch: main (to be initialized)
+- Base branch: main
 - Task branch: task/AJA-002-repository-foundation
 - Pull request: Not created
-- Commits: Not committed; repository initialization pending
+- Commits: `480b444` — `AJA-002: establish repository baseline`; `3faa551` —
+  `AJA-002: record baseline QA handoff`; `372e473` — `AJA-002: add repository
+  ignore rules`
 - Created: 2026-08-28
 - Updated: 2026-08-28
 
@@ -129,6 +141,8 @@ task branch before application foundation work begins.
 - Add the user-provided GitHub remote.
 - Create and push a focused, traceable baseline commit.
 - Record baseline repository status for the Milestone 0 task.
+- Add repository ignore rules for generated files, local dependencies, and
+  environment files while retaining `.env.example` for future setup guidance.
 
 ### Out of Scope
 
@@ -142,21 +156,32 @@ task branch before application foundation work begins.
 
 ### Acceptance Criteria
 
-- [ ] Git is initialized with `main` as its base branch.
-- [ ] The supplied `origin` remote is configured.
-- [ ] A baseline commit contains the existing repository materials and task record.
-- [ ] The baseline is pushed to `origin/main`.
+- [x] Git is initialized with `main` as its base branch.
+- [x] The supplied `origin` remote is configured.
+- [x] A baseline commit contains the existing repository materials and task record.
+- [x] The baseline is pushed to `origin/main`.
+- [x] A `.gitignore` protects generated files and local environment values from
+  accidental commits.
 
 ### Implementation Notes
 
 - The delivery workflow requires `main` for the initial baseline; the supplied
   `master` push command is therefore normalized to `main`.
+- Baseline commit `480b444` was pushed to `origin/main`. The dedicated task
+  branch was then created locally, as required before Milestone 0 application
+  foundation work begins.
+- The user requested `.gitignore` after the initial QA handoff, so this task
+  returned to In Progress before the requested scoped addition.
 
 ### Validation Evidence
 
 | Command/check | Result | Date |
 |---|---|---|
-| Not run | Pending | 2026-08-28 |
+| `git status --short --branch` after push | Passed; `main` tracks `origin/main` | 2026-08-28 |
+| `git remote -v` | Passed; fetch and push URLs match the supplied repository | 2026-08-28 |
+| `git log -1 --oneline` | Passed; `480b444 AJA-002: establish repository baseline` | 2026-08-28 |
+| `git diff --check` | Passed; no whitespace errors | 2026-08-28 |
+| `git check-ignore -v --no-index node_modules .next .env .env.example` | Passed; generated files and `.env` are ignored, while the negated `.env.example` rule remains trackable | 2026-08-28 |
 
 ### Manual QA
 
@@ -164,19 +189,512 @@ task branch before application foundation work begins.
    - Expected: The baseline commit and repository documentation are visible.
 2. Inspect the repository remotes locally with `git remote -v`.
    - Expected: `origin` points to the supplied GitHub repository for fetch and push.
+3. Review `.gitignore`.
+   - Expected: Next.js output, dependencies, local `.env*` files, Vercel state,
+     logs, and OS files are ignored; `.env.example` is explicitly retained.
 
 ### QA Result
 
-- Status: Pending
-- Tested by: Pending
-- Date: Pending
-- Actual result: Pending
-- Evidence/notes: Pending
+- Status: Passed
+- Tested by: User
+- Date: 2026-08-28
+- Actual result: User approved the Git baseline and ignore rules.
+- Evidence/notes: Approval received in the assessment session.
 
 ### Known Limitations
 
 - This task only establishes the Git baseline. The Next.js foundation remains
-  pending on the dedicated task branch.
+  pending as AJA-003.
+
+## AJA-003 — Build Next.js application foundation
+
+- Milestone: MILESTONE 0 — Repository and Foundation
+- Status: QA Failed
+- Owner: AI
+- External issue: Not created; no Jira or ClickUp integration was used
+- Base branch: task/AJA-002-repository-foundation (contains the approved local
+  bootstrap work; it has not been merged because no merge authorization was requested)
+- Task branch: task/AJA-003-nextjs-foundation
+- Pull request: Not created
+- Commits: `6964e54` — `AJA-003: build Next.js application foundation`;
+  `2b5c2d6` — `AJA-003: record foundation validation`; `5eebc49` —
+  `AJA-003: add system color themes`; `4d7e491` — `AJA-003: record theme validation`
+- Created: 2026-08-28
+- Updated: 2026-08-28
+
+### Outcome
+
+A runnable Next.js App Router application with TypeScript and Tailwind CSS,
+including a basic product shell and documented local setup.
+
+### Scope
+
+- Scaffold the locked Next.js, TypeScript, App Router, and Tailwind stack.
+- Add a minimal responsive application shell for the future document editor.
+- Add `.env.example` with configuration placeholders only.
+- Add README instructions for install, development, linting, and production build.
+- Support light and dark color schemes from the system preference, using
+  semantic CSS theme tokens rather than component-level color values.
+- Verify the required foundation commands.
+
+### Out of Scope
+
+- Prisma, database connections, authentication, seeded users, and documents.
+- Tiptap, rich-text editing, file import, sharing, and deployment.
+
+### Dependencies
+
+- AJA-002 approved Git baseline and ignore rules.
+- npm registry access to install scaffold dependencies.
+
+### Acceptance Criteria
+
+- [x] `npm install` succeeds from a clean checkout.
+- [x] `npm run dev` starts the application.
+- [x] `npm run lint` passes.
+- [x] `npm run build` passes.
+- [x] The application shell renders successfully.
+- [x] No document, database, or editor behavior is implemented.
+- [x] The application shell supports system light and dark color schemes.
+- [x] Component markup uses semantic theme classes rather than direct color utilities.
+
+### Implementation Notes
+
+- Added the Next.js 16.3.3 App Router foundation with TypeScript, Tailwind CSS,
+  ESLint, and a static responsive landing shell.
+- Added `.env.example` as a non-secret future database configuration placeholder
+  and README instructions for setup and validation.
+- Next.js automatically appended a compatibility note to `AGENTS.md` when the
+  development server first ran; it is retained because the framework will
+  otherwise regenerate it.
+- No database, identity, document, editor, import, or sharing behavior was
+  added.
+- The user requested light/dark support after the first QA handoff, returning
+  the task to In Progress. The finished implementation uses system-aware CSS
+  custom properties for semantic canvas, surface, foreground, muted, border,
+  and accent roles; component markup no longer uses direct color utilities.
+
+### Files Changed
+
+- `.env.example`, `README.md`, `package.json`, and `package-lock.json`
+- Next.js, TypeScript, ESLint, and PostCSS configuration files
+- `src/app/layout.tsx`, `src/app/page.tsx`, and `src/app/globals.css`
+- `AGENTS.md` and this task register
+
+### Validation Evidence
+
+| Command/check | Result | Date |
+|---|---|---|
+| `npm install` | Passed; 359 packages added, audit reported 0 vulnerabilities | 2026-08-28 |
+| `npm run lint` | Passed | 2026-08-28 |
+| `npm run build` | Passed; static `/` route compiled and prerendered | 2026-08-28 |
+| `npm run dev` + local HTTP request | Passed; `GET /` returned 200 with expected shell content | 2026-08-28 |
+| `npm test` | Not run; no test script exists in the foundation task | 2026-08-28 |
+| Theme update: `npm run lint` | Passed | 2026-08-28 |
+| Theme update: `npm run build` | Passed; static `/` route compiled and prerendered | 2026-08-28 |
+| Direct component color utility scan | Passed; no slate, indigo, or white color utilities remain in `src/app` | 2026-08-28 |
+
+### Manual QA
+
+1. Run `npm install`, then `npm run dev`, and open [http://localhost:3000](http://localhost:3000).
+   - Expected: A responsive Ajaia Docs foundation shell loads without console or runtime errors.
+2. Run `npm run lint` and `npm run build`.
+   - Expected: Both commands exit successfully.
+3. Inspect the shell.
+   - Expected: It adapts to the operating system's light/dark preference and contains no document creation, editor, database, or sharing functionality.
+4. Change the operating system or browser emulation preference between light and dark mode, then refresh the page.
+   - Expected: The shell uses the corresponding canvas, surface, text, border, and accent colors without a component-level theme toggle.
+
+### QA Result
+
+- Status: Passed
+- Tested by: User
+- Date: 2026-08-28
+- Actual result: User approved the foundation and instructed work to move to the next milestone.
+- Evidence/notes: Approval received in the assessment session.
+
+### Known Limitations
+
+- The foundation intentionally contains no persistence, identity, document,
+  editor, import, or sharing functionality; those are planned for later milestones.
+- `npm install` reported a non-blocking pending optional postinstall approval for
+  `unrs-resolver`; lint, build, and runtime validation all passed.
+
+## AJA-004 — Add database and demo identity
+
+- Milestone: MILESTONE 1 — Database and Seeded Users
+- Status: Done
+- Owner: AI
+- External issue: Not created; no Jira or ClickUp integration was used
+- Base branch: task/AJA-003-nextjs-foundation (contains approved local Milestone 0 work; it has not been merged because no merge authorization was requested)
+- Task branch: task/AJA-004-database-demo-identity
+- Pull request: Not created
+- Commits: `90f93f7` — `AJA-004: add database and demo identity foundation`; pending QA-handoff commit
+- Created: 2026-08-28
+- Updated: 2026-08-28
+
+### Outcome
+
+The application has its locked Prisma/PostgreSQL data model, an idempotent seed
+for Alex, Sam, and Jordan, and a server-backed demo-user switcher using an
+HTTP-only cookie.
+
+### Scope
+
+- Configure Prisma for PostgreSQL/Supabase and add the User, Document, and
+  DocumentShare models with locked relations and constraints.
+- Add a migration and idempotent seed script for the three fixed demo users.
+- Add server-only current-user resolution with a safe Alex fallback.
+- Add a server action and accessible UI to select a seeded demo user.
+- Add setup documentation and scripts for generation, migration, and seeding.
+
+### Out of Scope
+
+- Document dashboard, creation, rename, content editing, importing, and sharing UI.
+- Production authentication or authorization beyond resolving the demo identity.
+- Connecting to, modifying, or exposing any database credentials in source control.
+
+### Dependencies
+
+- A Supabase PostgreSQL `DATABASE_URL` in local `.env` is required to apply the
+  migration, run the seed, and verify live connectivity. No local URL is currently configured.
+
+### Acceptance Criteria
+
+- [x] Prisma schema has CUID string IDs, PostgreSQL datasource, locked relations,
+  cascade/restrict behavior, and a unique document-share pair.
+- [x] A migration and idempotent seed define exactly Alex, Sam, and Jordan by stable email.
+- [x] The selected seeded user is written only by server-side code to an HTTP-only cookie.
+- [x] Manual QA: the switcher preserves a valid selection across refresh and defaults invalid or absent cookies to Alex.
+- [x] Generated client, lint, and build validation pass.
+- [x] With a supplied local Supabase connection, migration, seed, and connectivity verification pass.
+- [x] No document/editor behavior is implemented.
+
+### Implementation Notes
+
+- Added Prisma 7.10 with the PostgreSQL driver adapter and a schema configured
+  through `prisma.config.ts`.
+- Added migration `20260828105654_init`, which creates the locked tables,
+  constraints, and foreign-key behavior.
+- Added idempotent user upserts for Alex, Sam, and Jordan and confirmed a repeat
+  seed succeeds without duplication.
+- Added current-user resolution and a server action that validates the selected
+  seeded user before writing an HTTP-only, same-site cookie.
+- The runtime response confirmed all three users are available and Alex is the
+  fallback selection. Cookie selection persistence requires the documented
+  manual QA browser check.
+
+### Files Changed
+
+- `prisma/schema.prisma`, `prisma.config.ts`, `prisma/seed.ts`, and the initial migration
+- `src/lib/*`, `src/app/actions/demo-user.ts`, and `src/components/user-switcher.tsx`
+- `src/app/page.tsx`, package configuration, `.env.example`, `.gitignore`, README, and this task register
+
+### Validation Evidence
+
+| Command/check | Result | Date |
+|---|---|---|
+| `npx prisma migrate status` | Passed; one migration found and database schema is up to date | 2026-08-28 |
+| `npm run db:seed` (repeat run) | Passed; Alex, Sam, and Jordan seeded idempotently | 2026-08-28 |
+| `npm run lint` | Passed | 2026-08-28 |
+| `npm run build` | Passed with configured local `.env`; generated client and dynamic root route compiled | 2026-08-28 |
+| Local `GET /` | Passed; 200 response rendered Alex, Sam, and Jordan selector options with Alex selected | 2026-08-28 |
+| `npm test` | Not run; test milestone has not started and no test script exists yet | 2026-08-28 |
+
+### Manual QA
+
+1. Configure `DATABASE_URL` in an uncommitted `.env`, then run the documented migration and seed commands.
+   - Expected: The three demo users exist once; rerunning the seed does not duplicate them.
+2. Run the app and switch between Alex, Sam, and Jordan.
+   - Expected: The selected user is shown and remains selected after a refresh.
+3. Replace the cookie with an invalid value, then refresh.
+   - Expected: The app safely falls back to Alex.
+
+### QA Result
+
+- Status: Passed
+- Tested by: User
+- Date: 2026-08-28
+- Actual result: User approved Milestone 1 and instructed work to move to the next task.
+- Evidence/notes: Approval received in the assessment session.
+
+### Known Limitations
+
+- This is simulated demo identity, not production authentication.
+- No document/dashboard/editor behavior has been added; the current page only
+  establishes the selected demo-user context.
+
+## AJA-005 — Build dashboard and document lifecycle
+
+- Milestone: MILESTONE 2 — Dashboard and Document Creation
+- Status: Done
+- Owner: AI
+- External issue: Not created
+- Base branch: task/AJA-004-database-demo-identity
+- Task branch: task/AJA-005-dashboard-document-lifecycle
+- Pull request: Not created
+- Commits: `e3e783f` — `AJA-005: add dashboard document lifecycle`; pending QA-handoff commit
+- Created: 2026-08-28
+- Updated: 2026-08-28
+
+### Outcome
+
+Users can create, list, open, and rename their own documents; shared documents
+are listed separately and protected by server-side access checks.
+
+### Scope
+
+- Dashboard with mutually exclusive owned/shared sections ordered by `updatedAt`.
+- Create default documents, accessible document route, and owner-only rename.
+- Server-side identifier/title validation and safe 404/403 behavior.
+
+### Out of Scope
+
+- Rich-text editing, TXT import, granting shares UI, and automated tests.
+
+### Dependencies
+
+- AJA-004 approved database and demo identity.
+
+### Acceptance Criteria
+
+- [ ] Manual QA: Alex can create, rename, refresh, and retain a document.
+- [ ] Manual QA: Sam cannot discover Alex's private document.
+- [x] Owner-only title updates trim input and reject empty or overlong titles.
+- [x] Owned and shared queries separately order by most-recent update.
+
+### Implementation Notes
+
+- Added a server-rendered dashboard with separate `My Documents` and `Shared With Me` queries.
+- New documents are server-created for the current user with `Untitled Document`
+  and the required empty structured-document JSON.
+- Read access is checked server-side for the document route; inaccessible document
+  IDs use the route's not-found behavior.
+- Rename validates and trims titles on the server and queries ownership before update.
+
+### Files Changed
+
+- `src/app/page.tsx`, `src/app/documents/[id]/page.tsx`, and `src/app/actions/documents.ts`
+- `src/lib/documents.ts` and this task register
+
+### Validation Evidence
+
+| Command/check | Result | Date |
+|---|---|---|
+| `npm run lint` | Passed | 2026-08-28 |
+| `npm run build` | Passed; dynamic dashboard and document route compiled | 2026-08-28 |
+| Local `GET /` | Passed; dashboard returned create control and owned/shared sections | 2026-08-28 |
+| `npm test` | Not run; automated-test milestone has not started | 2026-08-28 |
+
+### Manual QA
+
+1. As Alex, create and rename a document, then refresh.
+   - Expected: The title persists.
+2. Switch to Sam and return to the dashboard.
+   - Expected: Alex's private document is absent.
+3. As Alex, visit the document route and rename the document with leading/trailing whitespace.
+   - Expected: The saved title is trimmed; empty and over-120-character titles are rejected without changing it.
+4. As Sam, manually enter Alex's private document URL.
+   - Expected: The route returns the not-found state rather than document data.
+
+### QA Result
+
+- Status: Passed
+- Tested by: User
+- Date: 2026-08-28
+- Actual result: User approved Milestone 2 and instructed work to move forward.
+- Evidence/notes: Approval received in the assessment session.
+
+### Known Limitations
+
+- Content editing, import, and sharing management are planned for later milestones.
+- The dashboard is intentionally minimal; rename validation feedback is not yet
+  rendered inline and will be refined with later form-feedback work.
+
+## AJA-006 — Add rich-text editor persistence
+
+- Milestone: MILESTONE 3 — Rich Text Editor
+- Status: Done
+- Owner: AI
+- External issue: Not created
+- Base branch: task/AJA-005-dashboard-document-lifecycle
+- Task branch: task/AJA-006-rich-text-editor
+- Pull request: Not created
+- Commits: `c78deae` — rich-text persistence; `5e0a2e3` — editor save controls
+- Created: 2026-08-28
+- Updated: 2026-08-28
+
+### Outcome
+
+Accessible document users can edit required Tiptap rich text and persist structured JSON through a 750 ms debounced autosave.
+
+### Scope
+
+- Tiptap toolbar and structured JSON persistence with server-side access checks.
+- 750 ms autosave, pending/saved/failed status, retry, size validation, and safe stale-response handling.
+
+### Out of Scope
+
+- TXT import, sharing UI, real-time collaboration, comments, and version history.
+
+### Dependencies
+
+- AJA-005 approved document routes.
+
+### Acceptance Criteria
+
+- [ ] Manual QA: required formatting persists after refresh for owner and shared user.
+- [x] Autosave is debounced, retryable, and does not let stale responses clear newer changes.
+- [x] Content over 2 MiB is safely rejected without loss.
+
+### Implementation Notes
+
+- Added the required Tiptap toolbar (bold, italic, underline, headings 1–3,
+  bullet and numbered lists) and structured JSON save action.
+- Added 750 ms debouncing, version-based stale response protection, visible save
+  state, retry, and server-side content-size validation.
+- Refined the editor workspace with grouped toolbar controls, accessible labels,
+  focus states, an empty-content prompt, and clearer save-status placement.
+
+### Validation Evidence
+
+| Command/check | Result | Date |
+|---|---|---|
+| `npm run lint` | Passed | 2026-08-28 |
+| `npm run build` | Passed; editor route compiled | 2026-08-28 |
+
+### Manual QA
+
+1. Create/open a document, edit and format content, then refresh.
+   - Expected: Content and formatting persist.
+
+### QA Result
+
+- Status: Failed
+- Tested by: Pending user QA
+- Date: Pending
+- Actual result: Editor visual hierarchy and control design felt too default and insufficiently polished.
+- Evidence/notes: User feedback received in the assessment session.
+
+### Known Limitations
+
+- Pending implementation.
+
+## AJA-007 — Add TXT import
+
+- Milestone: MILESTONE 4 — TXT File Import
+- Status: Ready for QA
+- Base branch: task/AJA-006-rich-text-editor
+- Task branch: task/AJA-007-txt-import
+- Commits: `d8ce8ce` — server TXT import; `7709607` — browser validation
+
+### Outcome
+
+Users can import a valid TXT file as a persisted editable document.
+
+### Scope
+
+- Client/server TXT validation, UTF-8 decoding, title derivation, and structured-content persistence.
+
+### Out of Scope
+
+- DOCX, object storage, and sharing UI.
+
+### Acceptance Criteria
+
+- [ ] Manual QA: valid TXT imports as an owned document; invalid, oversized, binary, and empty files are rejected.
+
+### Manual QA
+
+1. Import `notes.txt` containing multiple paragraphs.
+   - Expected: A persisted editable document opens with paragraphs preserved.
+2. Try a non-TXT file, a file over 1 MiB, a NUL-containing file, and whitespace-only text.
+   - Expected: Browser or server validation rejects the file without creating a document.
+
+## AJA-008 — Add document sharing
+
+- Milestone: MILESTONE 5 — Sharing
+- Status: Ready for QA
+- Base branch: task/AJA-007-txt-import
+- Task branch: task/AJA-008-document-sharing
+- Commits: `1b9f79b` — sharing action; `e356bbb` — recipient filtering
+
+### Outcome
+
+Owners can share documents with another seeded user; recipients can edit, while unshared users remain inaccessible.
+
+### Scope
+
+- Owner-only server sharing action and UI, shared document listing, and authorization enforcement.
+
+### Acceptance Criteria
+
+- [ ] Manual QA: Alex can share with Sam; Sam can edit; Jordan cannot access.
+
+### Manual QA
+
+1. Share an Alex document with Sam and switch users.
+   - Expected: Sam sees it under Shared With Me and can edit it.
+2. Switch to Jordan and enter the shared document URL.
+   - Expected: The not-found state appears; no content is disclosed.
+
+## AJA-009 — Add authorization tests
+
+- Milestone: MILESTONE 6 — Automated Test
+- Status: Ready
+- Base branch: task/AJA-008-document-sharing
+- Task branch: task/AJA-009-authorization-tests
+- Commits: Not committed
+
+### Outcome
+
+The core authorization and validation rules run through `npm test`.
+
+### Acceptance Criteria
+
+- [ ] Owner/shared/unshared access and owner-only mutation rules are tested.
+
+### Manual QA
+
+1. Run `npm test`.
+   - Expected: The suite passes.
+
+## AJA-011 — Add document version history
+
+- Milestone: Optional stretch
+- Status: Ready for QA
+- Base branch: task/AJA-010-ux-reliability
+- Task branch: task/AJA-011-version-history
+- Commits: `766feae` — version history and migration
+
+### Outcome
+
+Authorized users can inspect a compact chronological history of persisted document-content snapshots.
+
+### Scope
+
+- Persist a snapshot on content save and show authorized users a version list.
+
+### Out of Scope
+
+- Restore, diff, comments, branching, or real-time synchronization.
+
+### Acceptance Criteria
+
+- [ ] Manual QA: saving content creates an inspectable version snapshot for an authorized user.
+
+### Manual QA
+
+1. Edit and save a document twice.
+   - Expected: Both saved snapshots appear chronologically.
+
+### Validation Evidence
+
+| Command/check | Result |
+|---|---|
+| Supabase migration status | Passed; schema up to date |
+| `npm run lint` | Passed |
+| `npm run build` | Passed |
 
 ## Task Template
 

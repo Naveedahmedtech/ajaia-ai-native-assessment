@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             String          @id @default(cuid())
+  name           String
+  email          String          @unique
+  createdAt      DateTime        @default(now())
+  ownedDocuments Document[]      @relation("DocumentOwner")
+  documentShares DocumentShare[]
+  lastSavedDocuments Document[] @relation("DocumentLastSavedBy")
+}
+
+model Document {
+  id        String          @id @default(cuid())
+  title     String
+  content   Json
+  ownerId   String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  lastSavedById String?
+  owner     User            @relation("DocumentOwner", fields: [ownerId], references: [id], onDelete: Restrict)
+  shares    DocumentShare[]
+  versions  DocumentVersion[]
+  lastSavedBy User? @relation("DocumentLastSavedBy", fields: [lastSavedById], references: [id], onDelete: SetNull)
+}
+
+model DocumentVersion {
+  id         String   @id @default(cuid())
+  documentId String
+  content    Json
+  createdAt  DateTime @default(now())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+}
+
+model DocumentShare {
+  id         String   @id @default(cuid())
+  documentId String
+  userId     String
+  createdAt  DateTime @default(now())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@unique([documentId, userId])
+}

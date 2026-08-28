@@ -344,6 +344,7 @@ verified.
 - viewer/editor sharing roles
 - simultaneous real-time editing
 - presence
+- live real-time collaboration indicators
 - WebSockets
 - CRDTs
 - comments and suggestion mode
@@ -353,6 +354,19 @@ verified.
 - object storage
 - email invitations and notifications
 - analytics
+
+## Approved Optional Stretch Exception
+
+Approved on 2026-08-28: show a document's accurate, persisted **last saved by**
+name and timestamp. This is not presence, does not imply simultaneous editing,
+and must not use WebSockets, polling, CRDTs, or simulated collaborators.
+
+Approved on 2026-08-28: add a lightweight document version history that records
+content snapshots on save and lets an authorized user inspect prior snapshots.
+Restoration, diffing, comments, and branching are not included in this stretch.
+
+Approved on 2026-08-28: allow authorized users to export the current structured
+document content as Markdown. PDF export remains out of scope.
 - AI writing features
 - Redis, queues, Kafka, microservices, or Docker orchestration
 
