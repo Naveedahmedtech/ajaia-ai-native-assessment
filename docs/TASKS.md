@@ -547,6 +547,8 @@ Accessible document users can edit required Tiptap rich text and persist structu
   bullet and numbered lists) and structured JSON save action.
 - Added 750 ms debouncing, version-based stale response protection, visible save
   state, retry, and server-side content-size validation.
+- Refined the editor workspace with grouped toolbar controls, accessible labels,
+  focus states, an empty-content prompt, and clearer save-status placement.
 
 ### Validation Evidence
 
